@@ -1,5 +1,6 @@
 package x40241.jeffrey.lomibao.a3.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -86,22 +87,20 @@ public final class DBHelper
                 STOCK_INFO_TABLE.MIN.columnName + ", " +
                 STOCK_INFO_TABLE.MAX.columnName + ", " +
                 STOCK_INFO_TABLE.AVG.columnName + ", " +
-                STOCK_INFO_TABLE.MODIFIED.columnName +
-                ") values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                STOCK_INFO_TABLE.MODIFIED.columnName + ") values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
     private static final String INSERT_PRICE_DATA =
             "INSERT INTO " + PRICE_DATA_TABLE.TableName + "(" +
                     PRICE_DATA_TABLE.SYMBOL_ID.columnName + ", " +
                     PRICE_DATA_TABLE.TIMESTAMP.columnName + ", " +
-                    PRICE_DATA_TABLE.PRICE.columnName + ", " +
-                    ") values (?, ?, ?)";
+                    PRICE_DATA_TABLE.PRICE.columnName + ") values (?, ?, ?)";
 
 
     private Context context;
     private SQLiteDatabase db;
     private SQLiteStatement insertStmtStockInfo;
-//    private SQLiteStatement insertStmtPriceData;
+    private SQLiteStatement insertStmtPriceData;
 
     public DBHelper(final Context context)
     {
@@ -109,7 +108,7 @@ public final class DBHelper
         final OpenHelper openHelper = new OpenHelper(this.context);
         db = openHelper.getWritableDatabase();
         insertStmtStockInfo = db.compileStatement(INSERT_STOCK_INFO);
-//        insertStmtPriceData = db.compileStatement(INSERT_PRICE_DATA);
+        insertStmtPriceData = db.compileStatement(INSERT_PRICE_DATA);
     }
 
     public long insert (final StockInfo stockInfo)
@@ -123,16 +122,42 @@ public final class DBHelper
         insertStmtStockInfo.bindDouble(STOCK_INFO_TABLE.MAX.column, stockInfo.getMaxPrice());
         insertStmtStockInfo.bindDouble(STOCK_INFO_TABLE.AVG.column, stockInfo.getAveragePrice());
         insertStmtStockInfo.bindLong(STOCK_INFO_TABLE.MODIFIED.column, stockInfo.isModified() ? 1:0);
-        final long value = insertStmtStockInfo.executeInsert();
-        if(DEBUG) Log.d (LOGTAG, "value="+value);
+        long value = insertStmtStockInfo.executeInsert();
+        if(DEBUG) Log.d (LOGTAG, STOCK_INFO_TABLE.TableName + " value = " + value);
 
-//        final Cursor cursor = db.execSQL("SELECT last_insert_rowid()" + STOCK_INFO_TABLE.TableName);
-//        cursor.getLong(cursor.getColumnIndex("_id"))
-//        insertStmtStockInfo.bindString(PRICE_DATA_TABLE.SYMBOL_ID.column, );
-//        insertStmtStockInfo.bindString(PRICE_DATA_TABLE.TIMESTAMP.column, stockInfo.getSequence());
-//        insertStmtStockInfo.bindString(PRICE_DATA_TABLE.PRICE.column, stockInfo.getPrice());
+        insertStmtPriceData.bindLong(PRICE_DATA_TABLE.SYMBOL_ID.column, value);
+        insertStmtPriceData.bindLong(PRICE_DATA_TABLE.TIMESTAMP.column, stockInfo.getSequence());
+        insertStmtPriceData.bindDouble(PRICE_DATA_TABLE.PRICE.column, stockInfo.getPrice());
+        value = insertStmtPriceData.executeInsert();
+        if(DEBUG) Log.d (LOGTAG, PRICE_DATA_TABLE.TableName + " value = " + value);
 
         return value;
+    }
+
+
+    public int update (final StockInfo stockInfo) {
+        int result;
+
+        final ContentValues cv = new ContentValues();
+        stockInfo.incrementCount();
+        if (DEBUG) Log.d (LOGTAG, "stockInfo: symbol = " + stockInfo.getSymbol() +
+                ", count = " + stockInfo.getCount() + ", id = " + stockInfo.getId());
+        cv.put(STOCK_INFO_TABLE.PRICE.columnName,stockInfo.getPrice());
+        cv.put(STOCK_INFO_TABLE.PREV_PRICE.columnName,stockInfo.getPreviousPrice());
+        cv.put(STOCK_INFO_TABLE.COUNT.columnName,stockInfo.getCount());
+        cv.put(STOCK_INFO_TABLE.MIN.columnName,stockInfo.getMinPrice());
+        cv.put(STOCK_INFO_TABLE.MAX.columnName,stockInfo.getMaxPrice());
+        cv.put(STOCK_INFO_TABLE.AVG.columnName,stockInfo.getAveragePrice());
+        result = db.update(STOCK_INFO_TABLE.TableName, cv, KEY_ID+"="+stockInfo.getId(), null);
+        if (DEBUG) Log.d (LOGTAG, "update stock info table result = " + result);
+
+        final ContentValues cv2 = new ContentValues();
+        cv2.put(PRICE_DATA_TABLE.PRICE.columnName,stockInfo.getPrice());
+        cv2.put(PRICE_DATA_TABLE.TIMESTAMP.columnName,stockInfo.getSequence());
+        result = db.update(PRICE_DATA_TABLE.TableName, cv2, KEY_SYMBOL_ID+"="+stockInfo.getSymbolId(), null);
+        if (DEBUG) Log.d (LOGTAG, "update price data table result = " + result);
+
+        return result;
     }
 
     public void deleteAll()
@@ -148,10 +173,14 @@ public final class DBHelper
         final Cursor cursor = db.query(STOCK_INFO_TABLE.TableName,
             new String[] { KEY_ID, KEY_SYMBOL, KEY_NAME, KEY_PRICE, KEY_PREV_PRICE, KEY_COUNT, KEY_MIN, KEY_MAX, KEY_AVG, KEY_MODIFIED },
                 null, null, null, null, KEY_NAME);
-        if (cursor.moveToFirst())
+        final Cursor cursor2 = db.query(PRICE_DATA_TABLE.TableName,
+                new String[] { KEY_ID, KEY_SYMBOL_ID, KEY_TIMESTAMP, KEY_PRICE },
+                null, null, null, null, KEY_ID);
+        if (cursor.moveToFirst() && cursor2.moveToFirst())
         {
             do {
                 final StockInfo stockInfo = new StockInfo();
+                stockInfo.setId(cursor.getLong(COLUMN_ID));
                 stockInfo.setSymbol(cursor.getString(COLUMN_SYMBOL));
                 stockInfo.setName(cursor.getString(COLUMN_NAME));
                 stockInfo.setPrice((int)cursor.getFloat(COLUMN_PRICE));
@@ -161,12 +190,18 @@ public final class DBHelper
                 stockInfo.setMaxPrice((int)cursor.getFloat(COLUMN_MAX));
                 stockInfo.setAveragePrice((int)cursor.getFloat(COLUMN_AVG));
                 stockInfo.setModified(cursor.getLong(COLUMN_MODIFIED) == 1);
+                stockInfo.setSymbolId(cursor2.getLong(COLUMN_RAW_SYMBOL_ID));
+                stockInfo.setSequence(cursor2.getLong(COLUMN_RAW_TIMESTAMP));
                 list.add(stockInfo);
+                if(DEBUG) Log.d(LOGTAG, "stockInfo: symbol = " + stockInfo.getSymbol() + " symbol_id = " + stockInfo.getSymbolId());
             }
-            while (cursor.moveToNext());
+            while (cursor.moveToNext() && cursor2.moveToNext());
         }
         if (cursor != null && !cursor.isClosed()) {
             cursor.close();
+        }
+        if (cursor2 != null && !cursor2.isClosed()) {
+            cursor2.close();
         }
         return list;
     }
@@ -210,6 +245,7 @@ public final class DBHelper
         {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
+
 
         @Override
         public void onCreate (final SQLiteDatabase db)

@@ -11,7 +11,9 @@ public final class StockInfo implements Serializable
     private static final boolean DEBUG = true;
     static final float AVERAGING_WEIGHT = 0.33f;
 
-    private long   sequence;
+    private long id;
+    private long symbolId;
+    private long sequence;
     private String name;
     private String symbol;
     private float  price;
@@ -22,6 +24,14 @@ public final class StockInfo implements Serializable
     private int count;
     private boolean modified;
 
+    public long getId() {
+        return id;
+    }
+    public void setId (long id) { this.id = id; }
+    public long getSymbolId() {
+        return symbolId;
+    }
+    public void setSymbolId (long symbolId) { this.symbolId = symbolId; }
     public long getSequence() {
         return sequence;
     }
@@ -60,6 +70,7 @@ public final class StockInfo implements Serializable
     public int getCount() {
         return count;
     }
+    public void incrementCount() { count++; }
     public void setCount(int count) {
         this.count = count;
     }

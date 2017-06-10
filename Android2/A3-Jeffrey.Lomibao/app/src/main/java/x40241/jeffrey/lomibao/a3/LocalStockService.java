@@ -133,6 +133,7 @@ public final class LocalStockService
     public void onDestroy() {
         Log.d (LOGTAG, "*** onDestroy()");
         notificationManager.cancel(NOTIFICATION_ID);
+        dbHelper.close();
     }
 
     @Override
@@ -197,25 +198,29 @@ public final class LocalStockService
                     lastSequence = sequence;
                     boolean updatedStockData = false;
                     if(stockData == null) {
+                        // This should not happen if the database is initialized properly.
                         if(DEBUG) { Log.d(LOGTAG, "stockData is null."); }
                         stockData = newStockData;
                         updatedStockData = true;
                         for(StockInfo newStock:stockData) {
                             newStock.updatePriceTrends(newStock.getPrice());
+                            dbHelper.insert(newStock);
                         }
                     } else {
                         for (StockInfo newStock:newStockData) {
                             int index = stockData.indexOf(newStock);
                             if (index < 0) {
+                                if(DEBUG) { Log.d(LOGTAG, "newStock: " + newStock.getName()); }
                                 updatedStockData = true;
                                 newStock.updatePriceTrends(newStock.getPrice());
                                 stockData.add(newStock);
-
+                                dbHelper.insert(newStock);
                             } else {
                                 float newStockPrice = newStock.getPrice();
                                 StockInfo stockInfo = stockData.get(index);
                                 stockInfo.setPrice(newStockPrice);
                                 stockInfo.updatePriceTrends(newStock.getPrice());
+                                dbHelper.update(stockInfo);
                             }
                         }
                     }
