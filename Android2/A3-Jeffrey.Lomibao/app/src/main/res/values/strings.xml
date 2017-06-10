@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">A3-Jeffrey.Lomibao</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="description">A local Service is running in the background.  Every 5 seconds it
+    generates a broadcast event to indicate new data has arrived.  The NEW_DATA event can be seen
+    by anyone who registers to receive it.</string>
+
+    <string name="label_service_status">Service Status:  </string>
+    <string name="label_message_count">Message Count:  </string>
+    <string name="label_stock_data">Stock Data:  </string>
+    <string name="label_waiting">Waiting...</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_home">Home</string>
+    <string name="action_save">Save</string>
+    <string name="action_revert">Revert</string>
+    <string name="local_service_connected">Local service connected.</string>
+    <string name="local_service_disconnected">Local service disconnected.</string>
+    <string name="stock_service_notification">Stock service started.</string>
+
+    <string name="Name">Name</string>
+    <string name="Symbol">Symbol</string>
+    <string name="Price">Price</string>
+    <string name="Minimum">Minimum</string>
+    <string name="Maximum">Maximum</string>
+    <string name="Average">Average</string>
+    <string name="Change">Change</string>
+
+</resources>
