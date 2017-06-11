@@ -12,31 +12,25 @@ public final class StockInfo implements Serializable
     static final float AVERAGING_WEIGHT = 0.33f;
 
     private long id;
-    private long symbolId;
-    private long sequence;
-    private String name;
     private String symbol;
+    private String name;
     private float  price;
-    private float minPrice;
-    private float maxPrice;
-    private float averagePrice;
     private float previousPrice;
     private int count;
-    private boolean modified;
+    private float min;
+    private float max;
+    private float avg;
+    private long modified; // timestamp
 
     public long getId() {
         return id;
     }
     public void setId (long id) { this.id = id; }
-    public long getSymbolId() {
-        return symbolId;
+    public String getSymbol() {
+        return symbol;
     }
-    public void setSymbolId (long symbolId) { this.symbolId = symbolId; }
-    public long getSequence() {
-        return sequence;
-    }
-    public void setSequence (long sequence) {
-        this.sequence = sequence;
+    public void setSymbol (String symbol) {
+        this.symbol = symbol;
     }
     public String getName() {
         return name;
@@ -44,82 +38,40 @@ public final class StockInfo implements Serializable
     public void setName (String name) {
         this.name = name;
     }
-    public String getSymbol() {
-        return symbol;
-    }
-    public void setSymbol (String symbol) {
-        this.symbol = symbol;
-    }
     public float getPrice() {
         return price;
     }
-    public void setPrice (float price) {
-        if(this.price != price) {
-            modified = true;
-            count++;
-            previousPrice = this.price;
-            this.price = price;
-        }
-    }
+    public void setPrice (float price) { this.price = price; }
     public float getPreviousPrice() {
         return previousPrice;
     }
     public void setPreviousPrice(float previousPrice) {
         this.previousPrice = previousPrice;
     }
+    public float getPriceChange() {
+        return previousPrice - price;
+    }
     public int getCount() {
         return count;
     }
-    public void incrementCount() { count++; }
     public void setCount(int count) {
         this.count = count;
     }
-    public boolean isModified() {
-        return modified;
+    public float getMin() {
+        return min;
     }
-    public void setModified(boolean modified) {
+    public void setMin(float min) { this.min = min; }
+    public float getMax() {
+        return max;
+    }
+    public void setMax(float max) { this.max = max; }
+    public float getAvg() {
+        return avg;
+    }
+    public void setAvg(float avg) { this.avg = avg; }
+    public long getModified() { return modified; }
+    public void setModified (long modified) {
         this.modified = modified;
-    }
-    public float getMinPrice() {
-        return minPrice;
-    }
-    public void setMinPrice(float minPrice) { this.minPrice = minPrice; }
-    public float getMaxPrice() {
-        return maxPrice;
-    }
-    public void setMaxPrice(float maxPrice) { this.maxPrice = maxPrice; }
-    public float getAveragePrice() {
-        return averagePrice;
-    }
-    public void setAveragePrice(float averagePrice) { this.averagePrice = averagePrice; }
-    public float getPriceChange() {
-        return price - previousPrice;
-    }
-
-    public StockInfo() {
-        resetPriceTrends();
-    }
-
-    public void resetPriceTrends() {
-        minPrice = Float.NaN;
-        maxPrice = Float.NaN;
-        averagePrice = Float.NaN;
-        count = 0;
-    }
-
-    public void updatePriceTrends(float newPrice) {
-        if(Float.isNaN(minPrice) || (newPrice < minPrice)) {
-            minPrice = newPrice;
-        }
-        if(Float.isNaN(maxPrice) || (newPrice > maxPrice)) {
-            maxPrice = newPrice;
-        }
-        if(Float.isNaN(averagePrice)) {
-            averagePrice = newPrice;
-        } else {
-            float priceChange = newPrice - averagePrice;
-            averagePrice += priceChange * AVERAGING_WEIGHT;
-        }
     }
 
     @Override

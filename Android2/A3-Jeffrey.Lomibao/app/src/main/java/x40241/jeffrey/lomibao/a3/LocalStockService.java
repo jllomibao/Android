@@ -25,7 +25,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import x40241.jeffrey.lomibao.a3.db.DBHelper;
+import x40241.jeffrey.lomibao.a3.model.PriceData;
 import x40241.jeffrey.lomibao.a3.model.StockInfo;
+import x40241.jeffrey.lomibao.a3.model.StockQuote;
 import x40241.jeffrey.lomibao.a3.net.StockDataSAX;
 
 public final class LocalStockService
@@ -52,6 +54,8 @@ public final class LocalStockService
 
     // This is for managing the database
     DBHelper dbHelper;
+    private List<StockInfo> stockInfo;
+    private List<PriceData> priceData;
 
     // This is the object that receives interactions from clients.
     private final IBinder localBinder = new LocalBinder();
@@ -88,7 +92,6 @@ public final class LocalStockService
         if (DEBUG) Log.d (LOGTAG, "*** initialize() STARTED");
         // initialize database
         dbHelper = new DBHelper(this);
-        stockData = dbHelper.selectAll();
 
         // initialize timer that will periodically poll for new data
         timer.scheduleAtFixedRate(new DataWorker(), ONE_SECOND, STOCK_SERVICE_POLL_PERIOD);
@@ -133,7 +136,7 @@ public final class LocalStockService
     public void onDestroy() {
         Log.d (LOGTAG, "*** onDestroy()");
         notificationManager.cancel(NOTIFICATION_ID);
-        dbHelper.close();
+//        dbHelper.close();
     }
 
     @Override
@@ -179,7 +182,6 @@ public final class LocalStockService
 
     private int count;
     static private long lastSequence; // used for detecting new data
-    private List<StockInfo> stockData; // used to hold stock trend data
 
     class DataWorker
         extends TimerTask
@@ -188,64 +190,35 @@ public final class LocalStockService
         public void run() {
             Log.d(LOGTAG, "***** STARTING");
 
-            List<StockInfo> newStockData = getStockData();
-            if (DEBUG) Log.d(LOGTAG, "stockData.size = " + newStockData.size());
+            List<StockQuote> newStockQuote = getStockData();
+            if (DEBUG) Log.d(LOGTAG, "stockInfo.size = " + newStockQuote.size());
             // send new stock data to activity
-            if(newStockData.size() > 0) {
-                long sequence = newStockData.get(0).getSequence();
+            if(newStockQuote.size() > 0) {
+                long sequence = newStockQuote.get(0).getSequence();
                 if (DEBUG) Log.d(LOGTAG, "sequence = " + sequence + "; last = " + lastSequence);
                 if(sequence > lastSequence) {
                     lastSequence = sequence;
-                    boolean updatedStockData = false;
-                    if(stockData == null) {
-                        // This should not happen if the database is initialized properly.
-                        if(DEBUG) { Log.d(LOGTAG, "stockData is null."); }
-                        stockData = newStockData;
-                        updatedStockData = true;
-                        for(StockInfo newStock:stockData) {
-                            newStock.updatePriceTrends(newStock.getPrice());
-                            dbHelper.insert(newStock);
+                    dbHelper.update(newStockQuote);
+                    stockInfo = dbHelper.getStockInfoFromCache();
+                    // Sort by stock name
+                    Collections.sort(stockInfo, new Comparator<StockInfo>() {
+                        @Override
+                        public int compare(StockInfo lhs, StockInfo rhs) {
+                            return lhs.getName().compareTo(rhs.getName());
                         }
-                    } else {
-                        for (StockInfo newStock:newStockData) {
-                            int index = stockData.indexOf(newStock);
-                            if (index < 0) {
-                                if(DEBUG) { Log.d(LOGTAG, "newStock: " + newStock.getName()); }
-                                updatedStockData = true;
-                                newStock.updatePriceTrends(newStock.getPrice());
-                                stockData.add(newStock);
-                                dbHelper.insert(newStock);
-                            } else {
-                                float newStockPrice = newStock.getPrice();
-                                StockInfo stockInfo = stockData.get(index);
-                                stockInfo.setPrice(newStockPrice);
-                                stockInfo.updatePriceTrends(newStock.getPrice());
-                                dbHelper.update(stockInfo);
-                            }
-                        }
-                    }
-
-                    if(updatedStockData) {
-                        // Sort by stock name
-                        Collections.sort(stockData, new Comparator<StockInfo>() {
-                            @Override
-                            public int compare(StockInfo lhs, StockInfo rhs) {
-                                return lhs.getName().compareTo(rhs.getName());
-                            }
-                        });
-                    }
-                    notifyNewStockData(stockData);
+                    });
+                    notifyNewStockData(stockInfo);
                 }
             }
         }
     }
 
     //  utility method for retrieving stock data.
-    private List<StockInfo> getStockData()
+    private List<StockQuote> getStockData()
     {
         URL url = null;
         InputStream in = null;
-        List<StockInfo> stockData = null;
+        List<StockQuote> stockQuote = null;
         try {
             url = new URL(STOCK_SERVICE_URL);
 
@@ -261,7 +234,7 @@ public final class LocalStockService
                 return null;
             }
             in = httpConnection.getInputStream();
-            stockData = new StockDataSAX().parse(in);
+            stockQuote = new StockDataSAX().parse(in);
         }
         catch (MalformedURLException e) {
             e.printStackTrace();
@@ -283,12 +256,12 @@ public final class LocalStockService
                 catch (IOException e) { /* ignore */ }
             }
         }
-        return stockData;
+        return stockQuote;
     }
 
     private final ArrayList<OnNewStockDataListener> listeners = new ArrayList<>();
     public interface OnNewStockDataListener {
-        public void notifyNewStockData(final List<StockInfo> stockData);
+        public void notifyNewStockData(final List<StockInfo> stockInfo);
     }
     public void registerOnNewStockDataListener (final OnNewStockDataListener listener) {
         listeners.add(listener);
@@ -296,15 +269,15 @@ public final class LocalStockService
     public void unregisterOnNewStockDataListener (final OnNewStockDataListener listener) {
         listeners.remove(listener);
     }
-    private void notifyNewStockData (final List<StockInfo> stockData) {
-        this.stockData = stockData;
+    private void notifyNewStockData (final List<StockInfo> stockInfo) {
+        this.stockInfo = stockInfo;
         count++;
         if(DEBUG) {
             Log.d(LOGTAG, "notifyNewStockData(): count="+count);
             Log.d(LOGTAG, "notifyNewStockData(): listeners.size="+listeners.size());
         }
         for (OnNewStockDataListener listener : listeners) {
-            listener.notifyNewStockData(stockData);
+            listener.notifyNewStockData(stockInfo);
         }
     }
 }

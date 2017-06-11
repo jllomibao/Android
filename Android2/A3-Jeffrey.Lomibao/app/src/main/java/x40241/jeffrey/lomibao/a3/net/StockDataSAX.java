@@ -14,7 +14,7 @@ import java.util.List;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import x40241.jeffrey.lomibao.a3.model.StockInfo;
+import x40241.jeffrey.lomibao.a3.model.StockQuote;
 
 /**
  * Utility to parse Stocks data in the form:
@@ -31,14 +31,14 @@ import x40241.jeffrey.lomibao.a3.model.StockInfo;
  *   </stock>
  *   </Stocks>
  * 
- * ...into a List of StockInfo objects.
+ * ...into a List of StockQuote objects.
  * 
  * @author Jeffrey Peacock (Jeffrey.Peacock@uci.edu)
  */
 public final class StockDataSAX
 	extends DefaultHandler
 {
-    private static final String LOGTAG = "StockInfoSAX";
+    private static final String LOGTAG = "StockQuoteSAX";
     private static final boolean DEBUG = false;
     
     private static final String DOC_START_END_ELEMENT   = "Stocks";
@@ -46,20 +46,20 @@ public final class StockDataSAX
     private static final String SEQUENCE_ATTRIBUTE_NAME = "sequence";
     
     private long sequence;
-	private StockInfo stockInfo;
-	private List<StockInfo> list = new ArrayList<StockInfo>();
+	private StockQuote stockQuote;
+	private List<StockQuote> list = new ArrayList<StockQuote>();
     private StringBuilder buffer = new StringBuilder();
 
     public StockDataSAX() {}
     
-    public List<StockInfo> parse (byte[] bytes) throws Exception {
+    public List<StockQuote> parse (byte[] bytes) throws Exception {
         ByteArrayInputStream is = new ByteArrayInputStream(bytes);
         parse(is);
         is.close();
         return list;
     }
     
-    public List<StockInfo> parse (InputStream is) throws Exception {
+    public List<StockQuote> parse (InputStream is) throws Exception {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
         saxParser.parse(is, this);
@@ -95,8 +95,8 @@ public final class StockDataSAX
             return;
         }
         if (localName.equals(DATA_START_END_ELEMENT)) {
-            stockInfo = new StockInfo();
-            stockInfo.setSequence(sequence);
+            stockQuote = new StockQuote();
+            stockQuote.setSequence(sequence);
         }
     }
     
@@ -125,8 +125,8 @@ public final class StockDataSAX
         }
         if (localName.equals(DATA_START_END_ELEMENT)) {
             if (DEBUG) Log.d (LOGTAG, "***  END OF DATA ITEM");
-            list.add(stockInfo);
-            stockInfo = null;
+            list.add(stockQuote);
+            stockQuote = null;
             return;
         }
         parseEndElement (uri, localName, name, buffer.toString());
@@ -142,15 +142,15 @@ public final class StockDataSAX
             Log.d (LOGTAG, "value="+value);
         }
         if (localName.equals("name")) {
-            stockInfo.setName(value);
+            stockQuote.setName(value);
             return;
         }
         if (localName.equals("symbol")) {
-            stockInfo.setSymbol(value);
+            stockQuote.setSymbol(value);
             return;
         }
         if (localName.equals("price")) {
-            stockInfo.setPrice(Float.parseFloat(value));
+            stockQuote.setPrice(Float.parseFloat(value));
             return;
         }
     }

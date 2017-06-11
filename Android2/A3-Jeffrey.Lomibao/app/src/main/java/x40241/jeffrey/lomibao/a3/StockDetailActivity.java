@@ -55,9 +55,9 @@ public class StockDetailActivity extends Activity {
         symbolTextView.setText(listItem.getSymbol());
         priceTextView.setText("$ " + String.format("%.2f", listItem.getPrice()));
         priceDiffTextView.setText("$ " + String.format("%.2f", listItem.getPriceChange()));
-        minTextView.setText("$ " + String.format("%.2f", listItem.getMinPrice()));
-        maxTextView.setText("$ " + String.format("%.2f", listItem.getMaxPrice()));
-        avgTextView.setText("$ " + String.format("%.2f", listItem.getAveragePrice()));
+        minTextView.setText("$ " + String.format("%.2f", listItem.getMin()));
+        maxTextView.setText("$ " + String.format("%.2f", listItem.getMax()));
+        avgTextView.setText("$ " + String.format("%.2f", listItem.getAvg()));
 
     }
 

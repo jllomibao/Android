@@ -1,4 +1,4 @@
-package x40241.jeffrey.peacock.a3.ref.v1.db;
+package x40241.jeffrey.lomibao.a3.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,11 +10,13 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-import x40241.jeffrey.peacock.a3.ref.v1.model.PriceData;
-import x40241.jeffrey.peacock.a3.ref.v1.model.StockInfo;
-import x40241.jeffrey.peacock.a3.ref.v1.model.StockQuote;
+import x40241.jeffrey.lomibao.a3.model.PriceData;
+import x40241.jeffrey.lomibao.a3.model.StockInfo;
+import x40241.jeffrey.lomibao.a3.model.StockQuote;
 
 /*
  * Full documentation for SQLite can be found at http://sqlite.org
@@ -24,7 +26,7 @@ public final class DBHelper
     private static final String LOGTAG = DBHelper.class.getSimpleName();
     private static final boolean DEBUG = true;
     
-    private static final String DATABASE_NAME    = "stocks.db";
+    private static final String DATABASE_NAME    = "stocks_x402_41_a3.db";
     private static final int    DATABASE_VERSION = 1;
 
     //  Data is static and Singleton in nature.  Enum's work well for this but lead to a little
@@ -55,6 +57,7 @@ public final class DBHelper
         
         private STOCK_INFO_TABLE(final String columnName) {
             this.columnName = columnName;
+            if (DEBUG) Log.d(LOGTAG, "STOCK_INFO_TABLE columnName = " + columnName);
         }
     }
     
@@ -71,6 +74,7 @@ public final class DBHelper
         
         private PRICE_DATA_TABLE(final String columnName) {
             this.columnName = columnName;
+            if (DEBUG) Log.d(LOGTAG, "PRICE_DATA_TABLE columnName = " + columnName);
         }
     }
     
@@ -162,7 +166,20 @@ public final class DBHelper
                 StockInfoCache.put(stockInfo.getSymbol(), stockInfo);
         }
     }
-    
+
+    public List<StockInfo> getStockInfoFromCache() {
+        List<StockInfo> list = new ArrayList<>();
+        synchronized (StockInfoCache) {
+            Iterator it = StockInfoCache.entrySet().iterator();
+            while(it.hasNext()) {
+                Map.Entry pair = (Map.Entry)it.next();
+                list.add((StockInfo)pair.getValue());
+                it.remove(); // avoids a ConcurrentModificationException
+            }
+        }
+        return list;
+    }
+
     public synchronized void update (final List<StockQuote> list) {
         for (final StockQuote quote : list) {
             StockInfo stockInfo = getStockInfo(quote.getSymbol());
