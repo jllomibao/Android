@@ -10,9 +10,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import x40241.jeffrey.lomibao.a3.model.PriceData;
 import x40241.jeffrey.lomibao.a3.model.StockInfo;
@@ -168,16 +166,10 @@ public final class DBHelper
     }
 
     public List<StockInfo> getStockInfoFromCache() {
-        List<StockInfo> list = new ArrayList<>();
         synchronized (StockInfoCache) {
-            Iterator it = StockInfoCache.entrySet().iterator();
-            while(it.hasNext()) {
-                Map.Entry pair = (Map.Entry)it.next();
-                list.add((StockInfo)pair.getValue());
-                it.remove(); // avoids a ConcurrentModificationException
-            }
+            List<StockInfo> list = new ArrayList<>(StockInfoCache.values());
+            return list;
         }
-        return list;
     }
 
     public synchronized void update (final List<StockQuote> list) {
