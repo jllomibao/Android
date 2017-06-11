@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="planet_images">
+        <item>@drawable/mercury</item>
+        <item>@drawable/venus</item>
+        <item>@drawable/earth</item>
+        <item>@drawable/mars</item>
+        <item>@drawable/jupiter</item>
+        <item>@drawable/saturn</item>
+        <item>@drawable/uranus</item>
+        <item>@drawable/neptune</item>
+        <item>@drawable/pluto</item>
+    </integer-array>
+    <string-array name="planets">
+        <item>@string/mercury</item>
+        <item>@string/venus</item>
+        <item>@string/earth</item>
+        <item>@string/mars</item>
+        <item>@string/jupiter</item>
+        <item>@string/saturn</item>
+        <item>@string/uranus</item>
+        <item>@string/neptune</item>
+        <item>@string/pluto</item>
+    </string-array>
+    <string name="app_name">A1-Jeffrey.Lomibao</string>
+    <string name="earth">Earth</string>
+    <string name="jupiter">Jupiter</string>
+    <string name="mars">Mars</string>
+    <string name="mercury">Mercury</string>
+    <string name="neptune">Neptune</string>
+    <string name="please_wait_label">Please wait...</string>
+    <string name="pluto">Pluto</string>
+    <string name="saturn">Saturn</string>
+    <string name="thumbnail">thumbnail</string>
+    <string name="uranus">Uranus</string>
+    <string name="venus">Venus</string>
+</resources>

@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_menu_save"
+        android:title="@string/action_save"
+        android:onClick="onActionSaveClick"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_revert"
+        android:icon="@drawable/ic_menu_revert"
+        android:title="@string/action_revert"
+        android:onClick="onActionRevertClick"
+        app:showAsAction="ifRoom"/>
+
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        android:onClick="onActionSettingsClick"
+        app:showAsAction="never"/>
+
+</menu>

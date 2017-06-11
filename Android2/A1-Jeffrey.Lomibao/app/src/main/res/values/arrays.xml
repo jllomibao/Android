@@ -1,0 +1,24 @@
+<resources>
+    <string-array name="planets">
+        <item>@string/mercury</item>
+        <item>@string/venus</item>
+        <item>@string/earth</item>
+        <item>@string/mars</item>
+        <item>@string/jupiter</item>
+        <item>@string/saturn</item>
+        <item>@string/uranus</item>
+        <item>@string/neptune</item>
+        <item>@string/pluto</item>
+    </string-array>
+    <integer-array name="planet_images">
+        <item>@drawable/mercury</item>
+        <item>@drawable/venus</item>
+        <item>@drawable/earth</item>
+        <item>@drawable/mars</item>
+        <item>@drawable/jupiter</item>
+        <item>@drawable/saturn</item>
+        <item>@drawable/uranus</item>
+        <item>@drawable/neptune</item>
+        <item>@drawable/pluto</item>
+    </integer-array>
+</resources>
