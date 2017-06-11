@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="education">
+        <item>@string/highschool_label</item>
+        <item>@string/associate_label</item>
+        <item>@string/bachelor_label</item>
+        <item>@string/master_label</item>
+        <item>@string/doctorate_label</item>
+    </string-array>
+</resources>

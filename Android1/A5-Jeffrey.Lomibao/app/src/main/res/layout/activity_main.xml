@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textviewPVValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PVValueText"
+            android:text="7.01"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PVUnitText"
+            android:text="@string/pH"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textviewSVValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SVValueText"
+            android:text="25.0"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SVUnitText"
+            android:text="@string/degC"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonConfigure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onConfigureButtonClick"
+            android:text="@string/Configure" />
+
+        <Button
+            android:id="@+id/buttonUserManual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onUserManualButtonClick"
+            android:text="@string/UserManual" />
+
+    </LinearLayout>
+
+</LinearLayout>

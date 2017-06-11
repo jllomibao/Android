@@ -1,0 +1,10 @@
+#Mon Jun 05 21:34:35 PDT 2017
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+base.2=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\support-annotations-21.0.3_4512eb6abc60826aa3734021563aea1a834171a3
+base.1=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\internal_impl-21.0.3_39645c0f9ba0c24b56db39e72c8eedc74aec934e
+base.0=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_871dfe49a3ffc0c4fc776ee61aa7cdcee1b9f563
+file.2=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\support-annotations-21.0.3_4512eb6abc60826aa3734021563aea1a834171a3\\classes.dex
+file.1=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\internal_impl-21.0.3_39645c0f9ba0c24b56db39e72c8eedc74aec934e\\classes.dex
+file.0=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_871dfe49a3ffc0c4fc776ee61aa7cdcee1b9f563\\classes.dex

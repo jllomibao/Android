@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">A1-Jeffrey.Lomibao</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="whats_up">What\'s up?</string>
+    <string name="how_u_doin">How u doin?</string>
+    <string name="whats_your_sign">What\'s you\'re sign?</string>
+    <string name="think_fast">Think fast!</string>
+    <string name="heads_up">Heads up!</string>
+    <string name="whatever">Whatever.</string>
+    <string name="just_do_it">Just do it!</string>
+    <string name="save_money_live_better">Save money, live better.</string>
+    <string name="riddle_me_this">Riddle me this...</string>
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\jllom\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\Android\WebViewExample\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-21.0.3_4512eb6abc60826aa3734021563aea1a834171a3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\A4-Jeffrey.Lomibao\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="C:\Android\A4-Jeffrey.Lomibao\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_904988778224cd6debcd50ca637613e9bce0f868\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jllom\.android\build-cache\bda8c5de481c511973a52e455f89f932547e052c\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\Android\WebViewExample\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_871dfe49a3ffc0c4fc776ee61aa7cdcee1b9f563\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\A4-Jeffrey.Lomibao\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="534c2e17023e4fc062b2baf81009f17346f3fb35">
+        <dex dex="C:\Android\A4-Jeffrey.Lomibao\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_620ffcecc0720ec5a72fa845e4340282316788b1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\WebViewExample\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="88f330df42d9441b17c143935d81228ba8a00f07">
+        <dex dex="C:\Android\WebViewExample\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_af5a8b1502a375e66f3b71440da200763f0e8591\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Android\WebViewExample\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Android\WebViewExample\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a1a509e0be23c329fa587c3bb53488de9771e782\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\jllom\.android\build-cache\bda8c5de481c511973a52e455f89f932547e052c\output\jars\libs\internal_impl-21.0.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="C:\Android\WebViewExample\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-21.0.3_39645c0f9ba0c24b56db39e72c8eedc74aec934e\classes.dex" />
+    </item>
+
+</items>

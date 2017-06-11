@@ -1,0 +1,27 @@
+#Internal package file, do not edit.
+#Mon Jun 05 21:34:36 PDT 2017
+2.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_
+5.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_904988778224cd6debcd50ca637613e9bce0f868\\classes.dex
+5.set=DEX
+3.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_
+6.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\menu-v11\\main.xml
+2.set=ANDROID_RESOURCE
+4.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_
+7.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-xxhdpi-v4\\ic_launcher.png
+7.set=ANDROID_RESOURCE
+count=8
+0.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\activity_main.xml
+5.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_904988778224cd6debcd50ca637613e9bce0f868
+4.set=ANDROID_RESOURCE
+6.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_
+1.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_620ffcecc0720ec5a72fa845e4340282316788b1\\classes.dex
+1.set=DEX
+7.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_
+2.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_\\resources.arsc
+6.set=ANDROID_RESOURCE
+0.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_
+3.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_\\AndroidManifest.xml
+3.set=ANDROID_RESOURCE
+1.base=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_620ffcecc0720ec5a72fa845e4340282316788b1
+4.file=C\:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\menu\\main.xml
+0.set=ANDROID_RESOURCE

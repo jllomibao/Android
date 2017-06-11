@@ -1,0 +1,205 @@
+[
+    {
+        "outputFile": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 5,
+                    "endColumn": 19,
+                    "endOffset": 192
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\arrays.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 151,
+                        "endLine": 8,
+                        "endColumn": 19,
+                        "endOffset": 288
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 197,
+                    "endLine": 9,
+                    "endColumn": 19,
+                    "endOffset": 327
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\arrays.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 4,
+                        "startOffset": 16,
+                        "endLine": 4,
+                        "endColumn": 19,
+                        "endOffset": 146
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 332,
+                    "endColumn": 56,
+                    "endOffset": 384
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 89,
+                        "endColumn": 56,
+                        "endOffset": 141
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 389,
+                    "endColumn": 54,
+                    "endOffset": 439
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 146,
+                        "endColumn": 54,
+                        "endOffset": 196
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 444,
+                    "endColumn": 52,
+                    "endOffset": 492
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 111,
+                        "endColumn": 52,
+                        "endOffset": 159
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 497,
+                    "endColumn": 55,
+                    "endOffset": 548
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 55,
+                        "endOffset": 106
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 553,
+                    "endColumn": 50,
+                    "endOffset": 599
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 208,
+                        "endColumn": 50,
+                        "endOffset": 254
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 604,
+                    "endColumn": 43,
+                    "endOffset": 643
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 164,
+                        "endColumn": 43,
+                        "endOffset": 203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 648,
+                    "endLine": 22,
+                    "endColumn": 12,
+                    "endOffset": 934
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 186,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 472
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 939,
+                    "endLine": 25,
+                    "endColumn": 12,
+                    "endOffset": 1094
+                },
+                "from": {
+                    "file": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 510,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "endOffset": 665
+                    }
+                }
+            }
+        ]
+    }
+]

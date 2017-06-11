@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">A5-Jeffrey.Lomibao</string>
+    <string name="pH">pH</string>
+    <string name="degC">°C</string>
+    <string name="degF">°F</string>
+    <string name="Configure">Configure</string>
+    <string name="UserManual">User Manual</string>
+    <string name="Tag">Tag</string>
+    <string name="LowerRangeValue">Lower Range Value</string>
+    <string name="UpperRangeValue">Upper Range Value</string>
+    <string name="TemperatureCompensation">Temperature Compensation</string>
+    <string name="Auto">Auto</string>
+    <string name="Manual">Manual</string>
+    <string name="ManualTemperature">Manual Temperature</string>
+</resources>

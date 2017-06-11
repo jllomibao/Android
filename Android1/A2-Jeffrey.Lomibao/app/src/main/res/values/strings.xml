@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">A2-Jeffrey.Lomibao</string>
+
+    <!-- main.xml -->
+    <string name="firstname_label">First Name</string>
+    <string name="lastname_label">Last Name</string>
+    <string name="gender_label">Gender</string>
+    <string name="male_label">Male</string>
+    <string name="female_label">Female</string>
+    <string name="unknown_label">Unknown</string>
+    <string name="ok_label">OK</string>
+    <string name="clear_label">Clear</string>
+    <string name="list_label">List</string>
+
+    <string name="education_label">Education</string>
+    <string name="highschool_label">Highschool</string>
+    <string name="associate_label">Associate</string>
+    <string name="bachelor_label">Bachelor</string>
+    <string name="master_label">Master</string>
+    <string name="doctorate_label">Doctorate</string>
+
+    <string name="pets_label">Pets</string>
+    <string name="dog_label">Dog</string>
+    <string name="cat_label">Cat</string>
+    <string name="bird_label">Bird</string>
+    <string name="fish_label">Fish</string>
+    <string name="none_label">None</string>
+
+    <!-- list_item.xml -->
+    <string name="fullname_label">Full Name</string>
+</resources>
