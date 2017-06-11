@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.TextSwitcher;
 import android.widget.Toast;
 
 import java.util.List;
@@ -34,16 +34,16 @@ public class MainActivity
     private Intent  stockServiceIntent; // the intent used to start our service
     private LocalStockService stockService;  // a ref to the service once we are bound
     
-    private TextView statusText;
-    private TextView countText;
-    private TextView stockDataText;
-
     // these are for showing a list of stock prices
     private ListView stocksListView;
     private StocksListAdapter stocksListAdapter;
 
     private final Handler handler = new Handler();
-    
+
+    // these are for text switcher animation
+    private TextSwitcher mSwitcher;
+
+
     //  The ServiceConnection object the platform will use to inform us the service is started, 
     //  we are bound to it, and we can reference it directly.
     private ServiceConnection serviceConnection = new ServiceConnection() {
@@ -206,14 +206,9 @@ public class MainActivity
         return true;
     }
 
-    public void onActionSaveClick(MenuItem item) {
-        if(DEBUG) Log.d(LOGTAG, "Action Save clicked.");
-        Toast.makeText(activityContext, R.string.action_save, Toast.LENGTH_SHORT).show();
-    }
-
-    public void onActionRevertClick(MenuItem item) {
-        if(DEBUG) Log.d(LOGTAG, "Action Revert clicked.");
-        Toast.makeText(activityContext, R.string.action_revert, Toast.LENGTH_SHORT).show();
+    public void onActionDeleteClick(MenuItem item) {
+        if(DEBUG) Log.d(LOGTAG, "Action Delete clicked.");
+        Toast.makeText(activityContext, R.string.action_delete, Toast.LENGTH_SHORT).show();
     }
 
     public void onActionSettingsClick(MenuItem item) {

@@ -2,17 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_save"
-        android:icon="@drawable/ic_menu_save"
-        android:title="@string/action_save"
-        android:onClick="onActionSaveClick"
-        app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/action_revert"
-        android:icon="@drawable/ic_menu_revert"
-        android:title="@string/action_revert"
-        android:onClick="onActionRevertClick"
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/action_delete"
+        android:onClick="onActionDeleteClick"
         app:showAsAction="ifRoom"/>
 
     <!-- Settings, should always be in the overflow -->
