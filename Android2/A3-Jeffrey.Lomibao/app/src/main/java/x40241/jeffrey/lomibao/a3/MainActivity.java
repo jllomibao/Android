@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import x40241.jeffrey.lomibao.a3.db.DBHelper;
 import x40241.jeffrey.lomibao.a3.model.StockInfo;
 
 public class MainActivity
@@ -209,6 +210,10 @@ public class MainActivity
     public void onActionDeleteClick(MenuItem item) {
         if(DEBUG) Log.d(LOGTAG, "Action Delete clicked.");
         Toast.makeText(activityContext, R.string.action_delete, Toast.LENGTH_SHORT).show();
+        DBHelper dbHelper = new DBHelper(this);
+        dbHelper.deleteAll();;
+        stocksListAdapter.setList(dbHelper.getStockInfoFromCache());
+        stocksListAdapter.notifyDataSetChanged();
     }
 
     public void onActionSettingsClick(MenuItem item) {
