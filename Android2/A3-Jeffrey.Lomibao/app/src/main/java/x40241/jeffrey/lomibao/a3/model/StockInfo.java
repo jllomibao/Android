@@ -49,7 +49,7 @@ public final class StockInfo implements Serializable
         this.previousPrice = previousPrice;
     }
     public float getPriceChange() {
-        return previousPrice - price;
+        return (count < 2) ? 0.0f:previousPrice - price;
     }
     public int getCount() {
         return count;
