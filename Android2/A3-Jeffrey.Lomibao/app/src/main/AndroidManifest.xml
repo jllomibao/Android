@@ -10,14 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
-            android:launchMode="singleTop">
+        <activity android:name=".MainActivity" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StockDetailActivity" android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen"
+        <activity android:name=".StockDetailActivity" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="x40241.jeffrey.lomibao.a3.intent.action.listItem" />
