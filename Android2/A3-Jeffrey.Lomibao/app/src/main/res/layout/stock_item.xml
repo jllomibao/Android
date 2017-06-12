@@ -11,19 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textViewSymbol"
+        <TextSwitcher
+            android:id="@+id/textSwitcherSymbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/Symbol" />
 
-        <TextView
-            android:id="@+id/textViewPrice"
+        <TextSwitcher
+            android:id="@+id/textSwitcherPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Price"
             android:textAlignment="textEnd" />
     </LinearLayout>
 
@@ -32,15 +31,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textViewName"
+        <TextSwitcher
+            android:id="@+id/textSwitcherName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:text="@string/Name" />
 
-        <TextView
-            android:id="@+id/textViewPriceDiff"
+        <TextSwitcher
+            android:id="@+id/textSwitcherPriceDiff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
