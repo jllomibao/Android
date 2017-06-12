@@ -2,6 +2,7 @@ package x40241.jeffrey.lomibao.a3;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -55,6 +56,13 @@ public class StockDetailActivity extends Activity {
         symbolTextView.setText(listItem.getSymbol());
         priceTextView.setText("$ " + String.format("%.2f", listItem.getPrice()));
         priceDiffTextView.setText("$ " + String.format("%.2f", listItem.getPriceChange()));
+        if (listItem.getPriceChange() > 0) {
+            priceDiffTextView.setTextColor(Color.BLUE);
+        } else if (listItem.getPriceChange() < 0){
+            priceDiffTextView.setTextColor(Color.RED);
+        } else {
+            priceDiffTextView.setTextColor(Color.GRAY);
+        }
         minTextView.setText("$ " + String.format("%.2f", listItem.getMin()));
         maxTextView.setText("$ " + String.format("%.2f", listItem.getMax()));
         avgTextView.setText("$ " + String.format("%.2f", listItem.getAvg()));

@@ -38,8 +38,8 @@
             android:layout_weight="4"
             android:text="@string/Name" />
 
-        <TextSwitcher
-            android:id="@+id/textSwitcherPriceDiff"
+        <TextView
+            android:id="@+id/textViewPriceDiff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
