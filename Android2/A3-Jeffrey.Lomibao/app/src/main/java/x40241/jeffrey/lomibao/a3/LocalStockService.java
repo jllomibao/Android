@@ -10,6 +10,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -157,6 +158,7 @@ public final class LocalStockService
             Log.d (LOGTAG, "*** onBind(): toString="+intent.toString());
         }
         isBound = true;
+        Toast.makeText(this, R.string.local_service_connected, Toast.LENGTH_SHORT).show();
         return localBinder;
     }
 
@@ -168,6 +170,7 @@ public final class LocalStockService
             Log.d (LOGTAG, "*** onUnbind(): toString="+intent.toString());
         }
         isBound = false;
+        Toast.makeText(this, R.string.local_service_disconnected, Toast.LENGTH_SHORT).show();
         return true;
     }
     
@@ -178,6 +181,7 @@ public final class LocalStockService
             Log.d (LOGTAG, "*** onUnbind(): action="+intent.getAction());
             Log.d (LOGTAG, "*** onUnbind(): toString="+intent.toString());
         }
+        Toast.makeText(this, R.string.local_service_reconnected, Toast.LENGTH_SHORT).show();
     }
 
     private int count;
