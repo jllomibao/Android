@@ -82,20 +82,25 @@ public class StocksListAdapter extends BaseAdapter {
             holder.symbolTextSwitcher = (TextSwitcher) convertView.findViewById(R.id.textSwitcherSymbol);
             holder.nameTextSwitcher = (TextSwitcher) convertView.findViewById(R.id.textSwitcherName);
             holder.priceTextSwitcher = (TextSwitcher) convertView.findViewById(R.id.textSwitcherPrice);
-            holder.priceDiffTextView = (TextView) convertView.findViewById(R.id.textViewPriceDiff);
+            holder.priceDiffTextSwitcher = (TextSwitcher) convertView.findViewById(R.id.textSwitcherPriceDiff);
 
             holder.symbolTextSwitcher.setFactory(new ViewFactorySymbol());
             holder.nameTextSwitcher.setFactory(new ViewFactoryName());
             holder.priceTextSwitcher.setFactory(new ViewFactoryPrice());
+            holder.priceDiffTextSwitcher.setFactory(new ViewFactoryPriceDiff());
 
-            Animation in = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
-            Animation out = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
-            holder.nameTextSwitcher.setInAnimation(in);
-            holder.nameTextSwitcher.setOutAnimation(out);
-            holder.symbolTextSwitcher.setInAnimation(in);
-            holder.symbolTextSwitcher.setOutAnimation(out);
-            holder.priceTextSwitcher.setInAnimation(in);
-            holder.priceTextSwitcher.setOutAnimation(out);
+            Animation slide_in = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            Animation slide_out = AnimationUtils.loadAnimation(context, android.R.anim.slide_out_right);
+            Animation fade_in = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+            Animation fade_out = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+            holder.nameTextSwitcher.setInAnimation(slide_in);
+            holder.nameTextSwitcher.setOutAnimation(slide_out);
+            holder.symbolTextSwitcher.setInAnimation(fade_in);
+            holder.symbolTextSwitcher.setOutAnimation(fade_out);
+            holder.priceTextSwitcher.setInAnimation(slide_in);
+            holder.priceTextSwitcher.setOutAnimation(slide_out);
+            holder.priceDiffTextSwitcher.setInAnimation(fade_in);
+            holder.priceDiffTextSwitcher.setOutAnimation(fade_out);
 
             convertView.setTag(holder);
         }
@@ -105,14 +110,20 @@ public class StocksListAdapter extends BaseAdapter {
         holder.nameTextSwitcher.setText(item.getName());
         holder.symbolTextSwitcher.setText(item.getSymbol());
         holder.priceTextSwitcher.setText("$ " + String.format("%.2f", item.getPrice()));
-        holder.priceDiffTextView.setText("$ " + String.format("%.2f", item.getPriceChange()));
-        if (item.getPriceChange() > 0) {
-            holder.priceDiffTextView.setTextColor(Color.BLUE);
-        } else if (item.getPriceChange() < 0) {
-            holder.priceDiffTextView.setTextColor(Color.RED);
-        } else {
-            holder.priceDiffTextView.setTextColor(Color.GRAY);
+        float priceChange = item.getPriceChange();
+        holder.priceDiffTextSwitcher.setText("$ " + String.format("%.2f", priceChange));
+
+        int color = Color.TRANSPARENT;
+        if(priceChange > 0) {
+            color = Color.BLUE;
+        } else if(priceChange < 0){
+            color = Color.RED;
         }
+        TextView tv = (TextView)holder.symbolTextSwitcher.getCurrentView();
+        tv.setTextColor(color);
+        tv = (TextView)holder.priceTextSwitcher.getCurrentView();
+        tv.setTextColor(color);
+
         return convertView;
     }
 
@@ -128,7 +139,7 @@ public class StocksListAdapter extends BaseAdapter {
         TextSwitcher nameTextSwitcher;
         TextSwitcher symbolTextSwitcher;
         TextSwitcher priceTextSwitcher;
-        TextView priceDiffTextView;
+        TextSwitcher priceDiffTextSwitcher;
     }
 
     class ViewFactorySymbol implements ViewSwitcher.ViewFactory {
