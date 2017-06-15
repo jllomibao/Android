@@ -324,6 +324,8 @@ public final class DBHelper
         if (DEBUG) {
             Log.d (LOGTAG, "dbInsert.stockInfo.id="+id);
             Log.d (LOGTAG, "dbInsert.stockInfo.symbol="+stockInfo.getSymbol());
+            Log.d (LOGTAG, "dbInsert.stockInfo.price="+stockInfo.getPrice());
+            Log.d (LOGTAG, "dbInsert.stockInfo.count="+stockInfo.getCount());
         }
         return id;
     }

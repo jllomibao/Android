@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -15,8 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextSwitcher;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import java.util.List;
 
@@ -41,8 +43,17 @@ public class MainActivity
 
     private final Handler handler = new Handler();
 
-    // these are for text switcher animation
-    private TextSwitcher mSwitcher;
+    // these are for switcher animation
+    private ViewSwitcher viewSwitcher;
+    private View detailView;
+    private TextView nameTextView;
+    private TextView symbolTextView;
+    private TextView priceTextView;
+    private TextView priceDiffTextView;
+    private TextView minTextView;
+    private TextView maxTextView;
+    private TextView avgTextView;
+
 
 
     //  The ServiceConnection object the platform will use to inform us the service is started, 
@@ -85,6 +96,17 @@ public class MainActivity
         initialize();
 
         // Get UI references
+        viewSwitcher = (ViewSwitcher) findViewById(R.id.mainActivityViewSwitcher);
+        detailView = findViewById(R.id.detailView);
+
+        nameTextView = (TextView) findViewById(R.id.textViewDetailName);
+        symbolTextView = (TextView) findViewById(R.id.textViewDetailSymbol);
+        priceTextView = (TextView) findViewById(R.id.textViewDetailPrice);
+        priceDiffTextView = (TextView) findViewById(R.id.textViewDetailPriceDiff);
+        minTextView = (TextView) findViewById(R.id.textViewMinPrice);
+        maxTextView = (TextView) findViewById(R.id.textViewMaxPrice);
+        avgTextView = (TextView) findViewById(R.id.textViewAvgPrice);
+
         stocksListAdapter = new StocksListAdapter(this);
         stocksListView = (ListView)this.findViewById(R.id.stocksListView);
         stocksListView.setAdapter(stocksListAdapter);
@@ -98,16 +120,32 @@ public class MainActivity
                 }
                 StockInfo listItem = (StockInfo) stocksListView.getItemAtPosition(position);
                 Log.d (LOGTAG, listItem.getName());
+                // Use viewSwitcher to display detailView
+                nameTextView.setText(listItem.getName());
+                symbolTextView.setText(listItem.getSymbol());
+                priceTextView.setText("$ " + String.format("%.2f", listItem.getPrice()));
+                priceDiffTextView.setText("$ " + String.format("%.2f", listItem.getPriceChange()));
+                if (listItem.getPriceChange() > 0) {
+                    priceDiffTextView.setTextColor(Color.BLUE);
+                } else if (listItem.getPriceChange() < 0){
+                    priceDiffTextView.setTextColor(Color.RED);
+                } else {
+                    priceDiffTextView.setTextColor(Color.GRAY);
+                }
+                minTextView.setText("$ " + String.format("%.2f", listItem.getMin()));
+                maxTextView.setText("$ " + String.format("%.2f", listItem.getMax()));
+                avgTextView.setText("$ " + String.format("%.2f", listItem.getAvg()));
+                viewSwitcher.showNext();
                 //  Start new Activity.
                 //  The child Activity should be able to display the data that was selected.
                 // Use an IMPLICIT intent
-                Intent myIntent = new Intent();
-                myIntent.putExtra("listItem", listItem);
-
-                myIntent.setAction("x40241.jeffrey.lomibao.a3.intent.action.listItem");
-                if(myIntent.resolveActivity(getPackageManager())!= null) {
-                    startActivity(myIntent);
-                }
+//                Intent myIntent = new Intent();
+//                myIntent.putExtra("listItem", listItem);
+//
+//                myIntent.setAction("x40241.jeffrey.lomibao.a3.intent.action.listItem");
+//                if(myIntent.resolveActivity(getPackageManager())!= null) {
+//                    startActivity(myIntent);
+//                }
             }
         });
 
@@ -222,7 +260,6 @@ public class MainActivity
     }
 
     private int receiveCount;
-    @Override
     public void notifyNewStockData(final List<StockInfo> stockData) {
         receiveCount++;
         if(DEBUG) Log.d(LOGTAG, "*** receiveCount = " + receiveCount);
@@ -232,5 +269,16 @@ public class MainActivity
                 stocksListAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(DEBUG) Log.d(LOGTAG, "onBackPressed");
+        if (viewSwitcher.getCurrentView() == detailView) {
+            if(DEBUG) Log.d(LOGTAG, "viewSwitcher.showPrevious");
+            viewSwitcher.showPrevious();
+            return;
+        }
+        super.onBackPressed();
     }
 }

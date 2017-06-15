@@ -113,7 +113,7 @@ public class StocksListAdapter extends BaseAdapter {
         float priceChange = item.getPriceChange();
         holder.priceDiffTextSwitcher.setText("$ " + String.format("%.2f", priceChange));
 
-        int color = Color.TRANSPARENT;
+        int color = Color.GRAY;
         if(priceChange > 0) {
             color = Color.BLUE;
         } else if(priceChange < 0){
