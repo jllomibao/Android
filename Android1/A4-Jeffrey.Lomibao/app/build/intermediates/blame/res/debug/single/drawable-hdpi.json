@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Android\\Android1\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
+        "source": "C:\\Android\\Android1\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
         "merged": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
         "source": "C:\\Android\\A4-Jeffrey.Lomibao\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     }
