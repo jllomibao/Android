@@ -18,12 +18,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"/>
-        <TextView
-            android:id="@+id/textviewTag"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editTextTag"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="Device Tag"/>
+            android:paddingLeft="10dp"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -38,14 +37,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"/>
-        <TextView
-            android:id="@+id/textviewLRV"
+        <EditText
+            android:id="@+id/editTextLRV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="0.00"/>
+            android:inputType="numberDecimal"/>
         <TextView
-            android:id="@+id/textviewTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="3dp"
@@ -64,12 +62,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"/>
-        <TextView
-            android:id="@+id/textviewURV"
+        <EditText
+            android:id="@+id/editTextURV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="14.00"/>
+            android:inputType="numberDecimal"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,17 +106,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"/>
-        <TextView
-            android:id="@+id/textviewManualTemp"
+        <EditText
+            android:id="@+id/editTextManualTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="25.0"/>
+            android:inputType="numberDecimal"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="3dp"
             android:text="@string/degC"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/configure_padding"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onConfigureSaveButtonClick"
+            android:text="@string/Save" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
