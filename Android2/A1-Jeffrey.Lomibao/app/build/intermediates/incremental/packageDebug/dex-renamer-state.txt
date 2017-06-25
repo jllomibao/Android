@@ -1,7 +1,7 @@
-#Thu May 25 23:47:02 PDT 2017
-base.0=C\:\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_2025224cdbe8cb3d20fdcad6cdbd78badff205e7
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=C\:\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_b407c4d4430387ebd792cd40ffd562d8c81fce60\\classes.dex
-base.1=C\:\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_b407c4d4430387ebd792cd40ffd562d8c81fce60
-file.0=C\:\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_2025224cdbe8cb3d20fdcad6cdbd78badff205e7\\classes.dex
+#Sat Jun 24 08:30:32 PDT 2017
+base.0=C\:\\Android\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_0fa1d788fadccf2d54864fc500188d877990d3ae
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Android\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_33fc574ed9d703a8de95f1b8827bad5f9d196585\\classes.dex
+base.1=C\:\\Android\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_33fc574ed9d703a8de95f1b8827bad5f9d196585
+file.0=C\:\\Android\\Android2\\A1-Jeffrey.Lomibao\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_0fa1d788fadccf2d54864fc500188d877990d3ae\\classes.dex
