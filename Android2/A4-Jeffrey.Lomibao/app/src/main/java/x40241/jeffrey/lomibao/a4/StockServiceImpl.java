@@ -10,7 +10,6 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,7 +28,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import x40241.jeffrey.lomibao.a4.db.DBHelper;
-import x40241.jeffrey.lomibao.a4.model.PriceData;
 import x40241.jeffrey.lomibao.a4.model.StockInfo;
 import x40241.jeffrey.lomibao.a4.model.StockQuote;
 import x40241.jeffrey.lomibao.a4.net.StockDataSAX;
@@ -39,10 +38,12 @@ public final class StockServiceImpl
     private static final String LOGTAG = "StockServiceImpl";
     private static final boolean DEBUG = true;
     private static final int NOTIFICATION_ID = 1;
+    public static final boolean USE_REMOTE_BINDER = true;
 
     public static final String STOCK_SERVICE_URL = "http://x40241-stockservice.appspot.com/StockServlet";
     public static final int    ONE_SECOND     = 1000;  // milliseconds
     public static final int    STOCK_SERVICE_POLL_PERIOD = 5 * ONE_SECOND;
+    List<StockQuote> stockQuote = new ArrayList<>();
 
 
     // Track if we've been started at least once.
@@ -58,7 +59,6 @@ public final class StockServiceImpl
     // This is for managing the database
     DBHelper dbHelper;
     private List<StockInfo> stockInfo;
-    private List<PriceData> priceData;
 
     // This is the object that receives interactions from clients.
     private final IBinder localBinder = new LocalBinder();
@@ -76,17 +76,31 @@ public final class StockServiceImpl
     }
 
     /** StockService interface defined through AIDL. */
-//    private final StockService.Stub remoteBinder = new StockService.Stub() {
-//        public List<StockQuote> getLatestQuotes() {
+    private final StockService.Stub remoteBinder = new StockService.Stub() {
+        public List<StockQuote> getLatestQuotes() {
 //            return new ArrayList<StockQuote>(StockServiceImpl.this.getLatestQuotes());
-//        }
+            return StockServiceImpl.this.stockQuote;
+        }
 //        public StockInfo getStockInfo(final String symbol) {
-//            return StockServiceImpl.this.getStockInfo(symbol);
+////            return StockServiceImpl.this.getStockInfo(symbol);
+//            for(StockInfo si:stockInfo) {
+//                if(si.getSymbol().equals(symbol)) {
+//                    return si;
+//                }
+//            }
+//            return stockInfo.get(0);
 //        }
-//        public void deleteAll() {
-//            StockServiceImpl.this.deleteAll();
-//        }
-//    };
+
+        public int getProcessId() {
+            int processID = android.os.Process.myPid();
+            return processID;
+        }
+
+        public void deleteAll() {
+//            return StockServiceImpl.this.deleteAll();
+            dbHelper.deleteAll();
+        }
+    };
 
     // Setup the Intent we will use to connect to our service.
     public static Intent getServiceIntent (Context context, String clientname) {
@@ -174,8 +188,9 @@ public final class StockServiceImpl
             Log.d (LOGTAG, "*** onBind(): toString="+intent.toString());
         }
         isBound = true;
-        Toast.makeText(this, R.string.local_service_connected, Toast.LENGTH_SHORT).show();
-        return localBinder;
+        Toast.makeText(this, R.string.service_connected, Toast.LENGTH_SHORT).show();
+
+        return (USE_REMOTE_BINDER) ? remoteBinder:localBinder;
     }
 
     @Override
@@ -186,7 +201,7 @@ public final class StockServiceImpl
             Log.d (LOGTAG, "*** onUnbind(): toString="+intent.toString());
         }
         isBound = false;
-        Toast.makeText(this, R.string.local_service_disconnected, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.service_disconnected, Toast.LENGTH_SHORT).show();
         return true;
     }
     
@@ -197,7 +212,7 @@ public final class StockServiceImpl
             Log.d (LOGTAG, "*** onUnbind(): action="+intent.getAction());
             Log.d (LOGTAG, "*** onUnbind(): toString="+intent.toString());
         }
-        Toast.makeText(this, R.string.local_service_reconnected, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.service_reconnected, Toast.LENGTH_SHORT).show();
     }
 
     private int count;
@@ -239,7 +254,7 @@ public final class StockServiceImpl
     {
         URL url = null;
         InputStream in = null;
-        List<StockQuote> stockQuote = null;
+//        List<StockQuote> stockQuote = null;
         try {
             url = new URL(STOCK_SERVICE_URL);
 
@@ -290,7 +305,8 @@ public final class StockServiceImpl
         Bundle bundle = new Bundle();
         bundle.putSerializable("StockInfoList", (Serializable) stockInfoList);
         intent.putExtra("StockInfoListBundle", bundle);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+//        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        sendBroadcast(intent);
     }
 
     //    private final ArrayList<OnNewStockDataListener> listeners = new ArrayList<>();

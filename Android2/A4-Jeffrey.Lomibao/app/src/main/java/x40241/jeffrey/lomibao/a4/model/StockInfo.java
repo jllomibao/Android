@@ -10,7 +10,6 @@ public final class StockInfo implements Parcelable
 {
     private static final String LOGTAG = "StockInfo";
     private static final boolean DEBUG = true;
-    static final float AVERAGING_WEIGHT = 0.33f;
 
     private long id;
     private String symbol;
